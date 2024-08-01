@@ -29,4 +29,14 @@ module "eks_aws_load_balancer_controller" {
   tags         = var.tags
   oidc         = module.eks_cluster.oidc
   cluster_name = module.eks_cluster.cluster_name
+  vpc_id       = module.eks_network.vpc_id
+
+}
+
+module "external_dns" {
+  source       = "./modules/external-dns"
+  project_name = var.project_name
+  tags         = var.tags
+  oidc         = module.eks_cluster.oidc
+
 }
